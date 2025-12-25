@@ -20,7 +20,7 @@ nmap -sC -sV -p- <TARGET_IP>
 * **Port 80/443:** Apache Web Server
 * **Port 22:** Closed (SSH appears to be unresponsive)
 
-![INSERT SCREENSHOT OF NMAP SCAN HERE](Mr.Robot-THM/images/nmap_scan.png)
+![INSERT SCREENSHOT OF NMAP SCAN HERE](images/nmap_scan.png)
 
 ### Web Enumeration
 I navigated to the website and found a terminal-style interface inspired by the show. 
