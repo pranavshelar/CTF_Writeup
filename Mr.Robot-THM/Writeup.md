@@ -11,7 +11,9 @@
 ### Nmap Scan
 I began by scanning the target machine to identify open ports and services.
 
-`nmap -sC -sV -p- <TARGET_IP>`
+```bash
+nmap -sC -sV -p- <TARGET_IP>
+```
 
 
 **Results:**
