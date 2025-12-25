@@ -23,7 +23,9 @@ nmap -sC -sV -p- <TARGET_IP>
 ![INSERT SCREENSHOT OF NMAP SCAN HERE](path/to/screenshot1.png)
 
 ### Web Enumeration
-I navigated to the website and found a terminal-style interface inspired by the show. I ran `gobuster` to find hidden directories, but checking standard files first yielded results.
+I navigated to the website and found a terminal-style interface inspired by the show. 
+I ran `gobuster` to find hidden directories, but checking standard files first yielded results.
+![goubuster screenshot](Mr.Robot-THM/gobuster_scan.png)
 
 **Checking robots.txt**
 I navigated to `/robots.txt` and found two hidden files: `fsocity.dic` and the first key.
