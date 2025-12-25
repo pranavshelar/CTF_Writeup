@@ -6,7 +6,7 @@
 
 ---
 
-## 🔒1. Reconnaissance
+## 1. Reconnaissance
 
 ### Nmap Scan
 I began by scanning the target machine to identify open ports and services.
@@ -46,7 +46,7 @@ Then it gave us a wordlist with lesser entries.
 
 ---
 
-## 💥 2. Exploitation
+##  2. Exploitation
 
 ### WordPress Login
 I located a WordPress login page at `/wp-login.php`. Using the sorted dictionary file, I attempted to brute-force the credentials.
@@ -80,7 +80,7 @@ When I visited the 404 page URL, the shell connected.
 
 ---
 
-## 👤 3. Privilege Escalation (User)
+##  3. Privilege Escalation (User)
 
 ### Finding Key 2
 I browsed to `/home/robot`. I found the second flag file `key-2-of-3.txt`, but I did not have permission to read it. However, I found a raw MD5 password file.
@@ -106,7 +106,7 @@ I was then able to read the second key.
 
 ---
 
-## 🚀 4. Privilege Escalation (Root)
+##  4. Privilege Escalation (Root)
 
 ### SUID Enumeration
 I looked for files with the SUID bit set to see if I could escalate privileges to root.
@@ -130,7 +130,7 @@ I checked my identity with whoami and confirmed I was root.
 
 I navigated to /root and grabbed the final flag.
 
-![screenshot of final flag](images/root_final)
+![screenshot of final flag](images/root_final.png)
 
 Key 3: 04787ddef27c3dee1ee161b21670b4e4
 
