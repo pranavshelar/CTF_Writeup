@@ -1,2 +1,2 @@
-You can find the writeup at ./writeup.md
+You can find the writeup at (a link)[writeup.md]
 
