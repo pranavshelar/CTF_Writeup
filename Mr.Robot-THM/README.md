@@ -1,8 +1,8 @@
 # Mr. Robot CTF Writeup 
 
-**Platform:** TryHackMe / VulnHub
-**Difficulty:** Medium
-**Category:** Web Exploitation / Privilege Escalation
+**Platform:** TryHackMe / VulnHub \
+**Difficulty:** Medium \
+**Category:** Web Exploitation / Privilege Escalation 
 
 ---
 
@@ -24,17 +24,17 @@ nmap -sC -sV -p- <TARGET_IP>
 
 ### Web Enumeration
 I navigated to the website and found a terminal-style interface inspired by the show. 
-I ran `gobuster` to find hidden directories, but checking standard files first yielded results.
-![goubuster screenshot](Mr.Robot-THM/gobuster_scan.png)
+I ran `gobuster` to find hidden directories, but checking standard files first yielded results. \
+![goubuster screenshot](images/gobuster_scan.png)
 
 **Checking robots.txt**
 I navigated to `/robots.txt` and found two hidden files: `fsocity.dic` and the first key.
 
-![INSERT SCREENSHOT OF ROBOTS.TXT HERE](path/to/screenshot2.png)
+![INSERT SCREENSHOT OF ROBOTS.TXT HERE](images/robots.png)
 
 I downloaded the dictionary file `fsocity.dic` and confirmed the first flag.
 
-> **Key 1:** `[REPLACE WITH FLAG 1 TEXT]`
+> **Key 1:** `073403c8a58a1f80d943455fb30724b9`
 
 ### Viewing the fsociety.dic file
 
@@ -59,7 +59,7 @@ I used Hydra to crack Elliot's password using the sorted wordlist.
 
 `hydra -l elliot -P sorted.dic <TARGET_IP> http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=Invalid username"`
 
-![INSERT SCREENSHOT OF HYDRA SUCCESS HERE](path/to/screenshot3.png)
+![INSERT SCREENSHOT OF HYDRA SUCCESS HERE](images/hydra_output.png)
 
 * **Username:** `elliot`
 * **Password:** `ER28-0652`
@@ -69,14 +69,14 @@ Once logged into the WordPress dashboard, I navigated to **Appearance > Editor**
 
 I replaced the PHP code with a standard PHP Reverse Shell (PentestMonkey), pointing the IP and Port to my attack machine.
 
-![INSERT SCREENSHOT OF 404.PHP EDITOR HERE](path/to/screenshot4.png)
+![INSERT SCREENSHOT OF 404.PHP EDITOR HERE](images/wordpress_php.png)
 
 I started a Netcat listener:
 `nc -lvnp 4444`
 
 When I visited the 404 page URL, the shell connected.
 
-![INSERT SCREENSHOT OF TERMINAL WITH SHELL HERE](path/to/screenshot5.png)
+![INSERT SCREENSHOT OF TERMINAL WITH SHELL HERE](images/first_shell.png)
 
 ---
 
@@ -91,6 +91,7 @@ I browsed to `/home/robot`. I found the second flag file `key-2-of-3.txt`, but I
 
 I used an online hash cracker to reverse the MD5 hash.
 * **Cracked Password:** `abcdefghijklmnopqrstuvwxyz`
+![crackstation screenshot](images/hashcracking.png)
 
 ### Switching Users
 Using the cracked password, I switched to the user `robot`.
@@ -99,9 +100,9 @@ Using the cracked password, I switched to the user `robot`.
 
 I was then able to read the second key.
 
-![INSERT SCREENSHOT OF READING KEY 2 HERE](path/to/screenshot6.png)
+![INSERT SCREENSHOT OF READING KEY 2 HERE](images/key_2.png)
 
-> **Key 2:** `[REPLACE WITH FLAG 2 TEXT]`
+> **Key 2:** `822c73956184f694993bede3eb39f959`
 
 ---
 
@@ -110,9 +111,11 @@ I was then able to read the second key.
 ### SUID Enumeration
 I looked for files with the SUID bit set to see if I could escalate privileges to root.
 
-`find / -perm -u=s -type f 2>/dev/null`
+```bash
+find / -perm -u=s -type f 2>/dev/null
+```
 
-**Vulnerability Found:** `nmap`
+**Vulnerability Found:** 
 I noticed `nmap` had the SUID bit set. This version of Nmap allows interactive mode, which can be used to escape to a shell.
 
 ### Rooting the Box
@@ -121,3 +124,16 @@ I ran Nmap in interactive mode and spawned a shell.
 ```bash
 nmap --interactive
 nmap> !sh
+```
+
+I checked my identity with whoami and confirmed I was root.
+
+I navigated to /root and grabbed the final flag.
+
+![screenshot of final flag](images/root_final)
+
+Key 3: 04787ddef27c3dee1ee161b21670b4e4
+
+And at the end we have found all the keys which were required to complete the challenge.
+
+The machine was great exposure to enumeration, brute forcing passwords and privilege escalation. I gain a lot's of experience from the challenge because it's gives a real life sceanrio where it tells us that single misconfiguration in suid bit could lead to privilege escalation to root.
