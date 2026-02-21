@@ -50,8 +50,9 @@ I also tried exploring SUID with  `find / -perm -4000 2>/dev/null`  also found n
 I also tried running ``linpeas.sh``, but it also gave nothing.
 Then in the `/home/atena` I found a hidden file named ``.bash_history``. This file contained all the commands executed by user. After looking into file I found a docker command which was the key to getting the root privilege.   
 The command was ``docker -H 127.0.0.1:2375 run --rm -it --privileged --net=host -v /:/mnt alpine``    
-I ran this command and and we got access to the container. This container was having root privileges so i ran the find to see to it have root.txt:  
-``find / -type f -name root.txt``    
+I ran this command and and we got access to the container. This container was having root privileges so i ran the find command to see if it have the  root.txt file:         
+``find / -type f -name root.txt``       
+
 ![root](images/root.png) 
 And it found out the root.txt and and we also completed the challenge.
 >Escalate privileges and obtain root.txt>=THM{RCE_us1ng_Docker_API}
