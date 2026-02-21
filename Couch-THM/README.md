@@ -6,7 +6,7 @@
 
 ---
 ## Reconnaissance
-#### Nmap Scan
+### Nmap Scan
 Without Wasting any time I started scanning all the TCP ports with its Timing flag set to -T5 and  flags -sC and  -sV which will not leave any open ports and also run the default scripts on it
 ``` bash
 nmap -sV -sC -T5 -p- 10.48.132.222
@@ -19,7 +19,7 @@ We found two open port and also answer to Question 1
 The 2 ports open were port 22 (SSH) and port 5984 which was running the **CouchDB v1.6.1** which is a opensource NoSQL Database. 
 >Scan the machine. How many ports are open?=>CouchDB
 >What port is the database management system running on?>=5984        
-#### Web Enumeration
+### Web Enumeration
 When I visited the CouchDB with url ```http://10.48.132.222:5984``` .         
  It gave us a JSON response : ```{"couchdb":"Welcome","uuid":"ef680bb740692240059420b2c17db8f3","version":"1.6.1","vendor":{"version":"16.04","name":"Ubuntu"}} ```
    
