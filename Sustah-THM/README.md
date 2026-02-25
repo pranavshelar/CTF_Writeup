@@ -1,4 +1,4 @@
-# Couch CTF Writeup
+# Sustah CTF Writeup
 **Platform:** TryHackMe \
 **Difficulty:** Medium \
 **Category:** Web Exploitation / Privilege Escalation
@@ -9,11 +9,11 @@
 #### Nmap Scan
 Started the box and did the Nmap Scan to check which ports all ports are open.       
 ```
-nmap -T5 -p- <ip>
+nmap -T5 -p- sustah.thm
 ```
 Then after finding all open ports, I ran the nmap again on open ports  with default scripts and for finding Service Detection.      
 ```
-nmap -T5 -sV -sC -p22,80,8085 <ip>
+nmap -T5 -sV -sC -p22,80,8085 sustah.thm
 ```      
 ![images/nmap.png](images/nmap.png)       
 
@@ -36,7 +36,7 @@ When I spinned the wheel it immediately gave us message that
 
 ```
 POST / HTTP/1.1
-Host: 10.10.95.187:8085
+Host: sustah.thm:8085
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
@@ -56,7 +56,7 @@ This was some error. So I went back to **Burpsuite** and sent a request. I found
 ![rate_limit_error](images/rate_limit_error.png)  
   
 So i went to [**HackTricks - Rate Limit Bypass**](https://book.hacktricks.xyz/pentesting-web/rate-limit-bypass) to see if I can find some way to bypass the rate limiting. I found that by adding these  **Headers**  "X-Originating-IP: 127.0.0.1, X-Forwarded-For: 127.0.0.1, X-Remote-IP: 127.0.0.1, X-Remote-Addr: 127.0.0.1, X-Client-IP: 127.0.0.1, X-Host: 127.0.0.1 & X-Forwared-Host: 127.0.0.1" we can bypass the rate limiting.         
-So i again wrote a [**Python Script**](script.py) to brute force the number and evade the rate limiting by adding these headers into the request. After running it I was successfully able to find the number which was the correct guess to the game.        
+So i again wrote a [**Python Script**](script.py) to brute force the number and evade the rate limiting by adding these headers into the request. Also I brute force the number from 10000 to 30000 as the answer feild was asking for number with 5 digits.  After running it I was successfully able to find the number which was the correct guess to the game.        
 
 ![python script](images/python_script.png)    
 
