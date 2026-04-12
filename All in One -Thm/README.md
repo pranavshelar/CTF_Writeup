@@ -1,7 +1,7 @@
 # All in One CTF Writeup
 **Platform:** TryHackMe \
 **Difficulty:** Easy \
-**Category:** Web Exploitation / Wordpress / Privilege Escalation
+**Category:** Web Exploitation / Wordpress /Privilege Escalation
 
 ---
 ## Reconnaissance
@@ -72,11 +72,10 @@ We can further used the username found to try login into the wordpress applicati
 
 ## Exploitation
 ### Breaking into Wordpress Application 
-In the enumeration part we found out a hidden **cipher** text which was decoded to ``Try H@ckme@123``  and also the username found using **wpscan**. So combining them to login into `wp-admin` which is the login page into the wordpress application. After using credentials ``elyana:H@ckme@123`,  we were able **successfully** to successfully login into the wordpress aplication.                    
+In the enumeration part we found out a hidden **cipher** text which was decoded to ``Try H@ckme@123``  and also the username found using **wpscan**. So combining them to login into `wp-admin` which is the login page into the wordpress application. After using credentials ``elyana:H@ckme@123`,  we were able to  **successfully** login into the wordpress aplication.                    
 ### Gaining a Reverse Shell
 I first thought going with **vulnerable plugins** which were found using wpscan but there was also a another way to get a reverse shell using uploading a **PHP Reverse Shell** into a proper directory which will accept the PHP code.             
-The best location to add the PHP Reverse shell is the 404.php file in the **Theme editor** of a Theme.         
-To add the Reverse shell i choose the **Twenty Nineteen** theme. I choose the **Pentest Monkey's** PHP Reverse shell and to add it we shall go to **Appearance > Theme Editor** and select 404.php to edit the file with reverse shell and save it.                    
+The best location to add the PHP Reverse shell is the 404.php file in the **Theme editor** of a Theme(Twenty Nineteen).          I choose the **Pentest Monkey's** PHP Reverse shell and to add it we shall go to **Appearance > Theme Editor** and select 404.php to edit the file with reverse shell and save it.                    
 ![404.php](images/404_php.png)                                 
 So now to get a reverse shell we can access the file from location **`[http://allinone.thm/wordpress/wp-content/themes/twentynineteen/404.php]`**.               
 ![reverseshell](images/reverseshell.png)                    
