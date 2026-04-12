@@ -1,7 +1,7 @@
-# Couch CTF Writeup
+# All in One CTF Writeup
 **Platform:** TryHackMe \
 **Difficulty:** Easy \
-**Category:** Web Exploitation / Privilege Escalation
+**Category:** Web Exploitation / Wordpress / Privilege Escalation
 
 ---
 ## Reconnaissance
